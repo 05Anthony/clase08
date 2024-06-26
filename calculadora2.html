@@ -1,0 +1,146 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function mostrarPrecio() {
+            var producto = document.getElementById('productoSelect').value;
+            var precio;
+
+            // Definir los precios según el producto seleccionado
+            switch (producto) {
+                case 'producto1':
+                    precio = 4.50;
+                    break;
+                case 'producto2':
+                    precio = 6.20;
+                    break;
+                case 'producto3':
+                    precio = 1.20;
+                    break;
+                case 'producto4':
+                    precio = 12.50;
+                    break;
+                default:
+                    precio = 0; // Precio por defecto si no se selecciona ningún producto válido
+            }
+
+            // Mostrar el precio en el campo correspondiente
+            document.getElementById('precio').value = precio;
+        }
+
+        function calcularImporte() {
+            // Obtener los valores de los campos
+            var cantidad = parseInt(document.getElementById('cantidad').value);
+            var precio = parseFloat(document.getElementById('precio').value);
+            var descuento = parseInt(document.getElementById('descuento').value);
+
+            // Validar que la cantidad y el descuento sean mayores o iguales a 0
+            if (cantidad <= 0) {
+                alert('La cantidad debe ser mayor a 0');
+                return;
+            }
+            if (descuento < 0) {
+                alert('El descuento no puede ser menor a 0');
+                return;
+            }
+
+            // Calcular el importe en soles y dólares
+            var importeSoles = cantidad * precio - (cantidad * precio * descuento) / 100;
+            var importeDolares = importeSoles / 3.8;
+
+            // Mostrar el resultado en los campos correspondientes
+            document.getElementById('importeSoles').value = importeSoles.toFixed(2);
+            document.getElementById('importeDolares').value = importeDolares.toFixed(2);
+        }
+
+        function limpiarCampos() {
+            // Limpiar todos los campos del formulario
+            document.getElementById('productoSelect').value = '';
+            document.getElementById('precio').value = '';
+            document.getElementById('cantidad').value = '';
+            document.getElementById('descuento').value = '';
+            document.getElementById('importeSoles').value = '';
+            document.getElementById('importeDolares').value = '';
+        }
+    </script>
+    <style>
+        body{
+            background-image: linear-gradient(#c73b3b, #9198e5);
+            margin: 0;
+            padding: 0;
+        }
+        h1{
+            text-align: center;
+        }
+        img{
+            margin-top: 100px;
+            margin-left: 750px;
+        }
+
+        h2{
+            margin-left: 800px;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>
+                <img class="centrado" src="img/store.png" width="400">
+                <h2 >BOLETA DE COMPRAS</h2>
+            </td>
+        </tr>
+    </table>
+    <table style="margin: 0 auto; border: 5px solid black;">
+        <tr>
+            <td>Producto</td>
+            <td>
+                <select id="productoSelect" onchange="mostrarPrecio()">
+                    <option value="">Seleccionar...</option>
+                    <option value="producto1">Arroz Costeño</option>
+                    <option value="producto2">aceite</option>
+                    <option value="producto3">papas</option>
+                    <option value="producto3">fideos</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Precio</td>
+            <td><input type="text" id="precio" readonly></td>
+        </tr>
+        <tr>
+            <td>Cantidad</td>
+            <td><input type="number" id="cantidad" placeholder="Ingrese la cantidad"></td>
+        </tr>
+        <tr>
+            <td>Descuento (%)</td>
+            <td><input type="number" id="descuento" placeholder="Ingrese el descuento"></td>
+        </tr>
+        <tr>
+            <td>Importe S/</td>
+            <td><input type="text" id="importeSoles" readonly></td>
+        </tr>
+        <tr>
+            <td>Importe US</td>
+            <td><input type="text" id="importeDolares" readonly></td>
+        </tr>
+    </table>
+    <div class="botones" align="center">
+        <div class="botones-container">
+            <button class="calcular" onclick="calcularImporte()">Calcular</button>
+            <button class="limpiar" onclick="limpiarCampos()">Limpiar</button>
+        </div>
+    </div>
+</body>
+</html>
+        
+        
+            
+        
